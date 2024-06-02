@@ -437,6 +437,9 @@ class notch_port(circlefit, save_load, plotting, calibration):
 		self.z_data_sim = A2*(self.f_data-frcal)+self._S21_notch(self.f_data,fr=self.fitresults["fr"],Ql=self.fitresults["Ql"],Qc=self.fitresults["absQc"],phi=self.fitresults["phi0"],a=amp_norm,alpha=alpha,delay=delay)
 		self.z_data_sim_norm = self._S21_notch(self.f_data,fr=self.fitresults["fr"],Ql=self.fitresults["Ql"],Qc=self.fitresults["absQc"],phi=self.fitresults["phi0"],a=1.0,alpha=0.,delay=0.)
 		self._delay = delay
+		print('delay = ' delay)
+		print('alpha = ' alpha)
+		print('amp_norm = ' ampnorm)
 		
 	def GUIfit(self):
 		'''

@@ -37,7 +37,7 @@ class plotting(object):
 		axins.set_ylabel(r'Im[S$_{21}$]')
 		ax1.legend(fontsize=10)
 
-		ax2.plot(self.f_data*1e-9,np.angle(self.z_data_raw),label='rawdata')
+		ax2.plot(self.f_data*1e-9,np.angle(self.z_data_raw),label='raw data')
 		ax2.plot(self.f_data*1e-9,np.angle(self.z_data_sim),label='fit')
 		ax2.set_xlabel('f (GHz)')
 		ax2.set_ylabel('arg(|S21|)')
