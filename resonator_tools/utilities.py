@@ -25,23 +25,26 @@ class plotting(object):
 		imag = self.z_data_raw.imag
 		real2 = self.z_data_sim.real
 		imag2 = self.z_data_sim.imag
-		fig, (ax1, ax2) = plt.subplots(1, 2, figsize=[12, 8])
+		
+		fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=[12, 8])
 		axins = inset_axes(ax1, width=3, height=3,loc=3,borderpad=5)
 		ax1.plot(self.f_data*1e-9, np.absolute(self.z_data_raw), label='raw data')
 		ax1.plot(self.f_data*1e-9, np.absolute(self.z_data_sim), label='fit')
 		ax1.set_ylabel(r'$|S_{21}|$')
 		ax1.set_xlabel(r'Frequency (GHz)')
-		axins.plot(real, imag)
-		axins.plot(real2, imag2)
-		axins.set_xlabel(r'Re[S$_{21}$]')
-		axins.set_ylabel(r'Im[S$_{21}$]')
 		ax1.legend(fontsize=10)
-
-		ax2.plot(self.f_data*1e-9,np.angle(self.z_data_raw),label='raw data')
-		ax2.plot(self.f_data*1e-9,np.angle(self.z_data_sim),label='fit')
-		ax2.set_xlabel('f (GHz)')
-		ax2.set_ylabel('arg(|S21|)')
+		
+		ax2.plot(real, imag, label='raw data')
+		ax2.plot(real2, imag2, label='fit')
+		ax2.set_xlabel(r'Re[S$_{21}$]')
+		ax2.set_ylabel(r'Im[S$_{21}$]')
 		ax2.legend(fontsize=10)
+
+		ax3.plot(self.f_data*1e-9,np.angle(self.z_data_raw),label='raw data')
+		ax3.plot(self.f_data*1e-9,np.angle(self.z_data_sim),label='fit')
+		ax3.set_xlabel('f (GHz)')
+		ax3.set_ylabel('arg(|S21|)')
+		ax3.legend(fontsize=10)
 		plt.show()
 		
 	def plotcalibrateddata(self):
