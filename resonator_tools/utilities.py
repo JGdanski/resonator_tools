@@ -1,6 +1,8 @@
 import warnings
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib as mpl
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
 def Watt2dBm(x):
 	'''
@@ -23,24 +25,23 @@ class plotting(object):
 		imag = self.z_data_raw.imag
 		real2 = self.z_data_sim.real
 		imag2 = self.z_data_sim.imag
-		plt.subplot(221)
-		plt.plot(real,imag,label='rawdata')
-		plt.plot(real2,imag2,label='fit')
-		plt.xlabel('Re(S21)')
-		plt.ylabel('Im(S21)')
-		plt.legend()
-		plt.subplot(222)
-		plt.plot(self.f_data*1e-9,np.absolute(self.z_data_raw),label='rawdata')
-		plt.plot(self.f_data*1e-9,np.absolute(self.z_data_sim),label='fit')
-		plt.xlabel('f (GHz)')
-		plt.ylabel('|S21|')
-		plt.legend()
-		plt.subplot(223)
-		plt.plot(self.f_data*1e-9,np.angle(self.z_data_raw),label='rawdata')
-		plt.plot(self.f_data*1e-9,np.angle(self.z_data_sim),label='fit')
-		plt.xlabel('f (GHz)')
-		plt.ylabel('arg(|S21|)')
-		plt.legend()
+		fig, (ax1, ax2) = plt.subplots(1, 2, figsize=[12, 8])
+		axins = inset_axes(ax1, width=3, height=3,loc=3,borderpad=5)
+		ax1.plot(self.f_data*1e-9, np.absolute(self.z_data_raw), label='raw data')
+		ax1.plot(self.f_data*1e-9, np.absolute(self.z_data_sim), label='fit')
+		ax1.set_ylabel(r'$|S_{21}|$')
+		ax1.set_xlabel(r'Frequency (GHz)')
+		axins.plot(real, imag)
+		axins.plot(real2, imag2)
+		axins.set_xlabel(r'Re[S$_{21}$]')
+		axins.set_ylabel(r'Im[S$_{21}$]')
+		ax1.legend(fontsize=10)
+
+		ax2.plot(self.f_data*1e-9,np.angle(self.z_data_raw),label='rawdata')
+		ax2.plot(self.f_data*1e-9,np.angle(self.z_data_sim),label='fit')
+		ax2.set_xlabel('f (GHz)')
+		ax2.set_ylabel('arg(|S21|)')
+		ax2.legend(fontsize=10)
 		plt.show()
 		
 	def plotcalibrateddata(self):
