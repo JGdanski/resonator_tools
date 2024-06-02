@@ -27,7 +27,6 @@ class plotting(object):
 		imag2 = self.z_data_sim.imag
 		
 		fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=[12, 8])
-		axins = inset_axes(ax1, width=3, height=3,loc=3,borderpad=5)
 		ax1.plot(self.f_data*1e-9, np.absolute(self.z_data_raw), label='raw data')
 		ax1.plot(self.f_data*1e-9, np.absolute(self.z_data_sim), label='fit')
 		ax1.set_ylabel(r'$|S_{21}|$')
